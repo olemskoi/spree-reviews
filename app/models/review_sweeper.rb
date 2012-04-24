@@ -15,6 +15,6 @@ class ReviewSweeper < ActionController::Caching::Sweeper
   private
   
   def expire_cache_for(review)
-    review.reviewable.recalculate_rating
+    review.reviewable.recalculate_rating if review.reviewable
   end
 end
