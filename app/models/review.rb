@@ -15,8 +15,17 @@ class Review < ActiveRecord::Base
   scope :preview,      :limit => Spree::Reviews::Config[:preview_size], :order=>"created_at desc"
   attr_protected :user_id, :reviewable_id, :reviewable_type, :ip_address
 
+  before_save :handle_review_text
+
   def feedback_stars
     return 0 if feedback_reviews.count <= 0
     ((feedback_reviews.sum(:rating)/feedback_reviews.count) + 0.5).floor
+  end
+
+  private
+
+  def handle_review_text
+    rndr = Redcarpet::Render::NoHtmlTagsAndWrappedLinks.new()
+    self.review = Redcarpet::Markdown.new(rndr).render(self.review)
   end
 end

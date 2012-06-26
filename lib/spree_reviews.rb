@@ -1,5 +1,5 @@
 require 'spree_core'
-
+require 'redcarpet'
 
 module SpreeReviews
 
