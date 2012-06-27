@@ -14,7 +14,7 @@ module Redcarpet
       	:block_code, :block_quote, :block_html, :header, :list, :list_item,
         :paragraph, :autolink, :codespan, :double_emphasis, :emphasis,
         :triple_emphasis, :strikethrough, :superscript, :entity, :normal_text,
-        :link, :raw_html
+        :link
       ].each do |method|
         define_method method do |*args|
           args.first
