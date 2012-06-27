@@ -8,10 +8,18 @@ module Redcarpet
 			NOFOLLOW = { :rel => 'nofollow' }
 
 			attr_accessor :output_buffer
+
+			def initialize
+      	super :filter_html => true
+      end
+
+      def postprocess(full_document)
+        wrap_links_with_noindex!(full_document)
+      end
       
       # This makes redcarpet a plain text 
       [
-      	:block_code, :block_quote, :block_html, :header, :list, :list_item,
+      	:block_code, :block_quote, :header, :list, :list_item,
         :paragraph, :autolink, :codespan, :double_emphasis, :emphasis,
         :triple_emphasis, :strikethrough, :superscript, :entity, :normal_text,
         :link
@@ -19,14 +27,6 @@ module Redcarpet
         define_method method do |*args|
           args.first
         end
-      end
-
-      def initialize
-      	super :filter_html => true
-      end
-
-      def postprocess(full_document)
-        wrap_links_with_noindex!(full_document)
       end
 
       protected
