@@ -39,7 +39,7 @@ module Redcarpet
 		    end
 
 		    text.gsub!(%r{(\A| ){1}(www\.[\w\.]+)}) do |l|
-		      $&.gsub($2, noindex_link_to(l, "http://#{l}")
+		      $&.gsub($2, noindex_link_to(l, "http://#{l}"))
 		    end
 
 		    text.html_safe
