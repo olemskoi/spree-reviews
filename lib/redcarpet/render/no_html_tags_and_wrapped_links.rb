@@ -26,20 +26,20 @@ module Redcarpet
       end
 
       def postprocess(full_document)
-        wrap_links_with_noindex(full_document)
+        wrap_links_with_noindex!(full_document)
       end
 
       protected
 
-      def wrap_links_with_noindex(text)
+      def wrap_links_with_noindex!(text)
 		    links = URI.extract(text, %w[ http https mailto ])
-		    links.uniq.each do |link|
-		      wrapped_link = noindex_link_to(link, link)
-		      text.gsub!(link, wrapped_link)
+		    links.uniq.each do |l|
+		      wrapped_link = noindex_link_to(l, l)
+		      text.gsub!(l, wrapped_link)
 		    end
 
-		    text.gsub!(%r{(http://)?www\.[\w\.]+}) do |link| 
-		    	link =~ %r{^http://} ? link : noindex_link_to(link, "http://#{link}")
+		    text.gsub!(%r{\Awww\.[\w\.]+}) do |l|
+		    	noindex_link_to(l, "http://#{l}")
 		    end
 
 		    text.html_safe
