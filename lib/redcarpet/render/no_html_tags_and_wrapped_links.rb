@@ -38,7 +38,7 @@ module Redcarpet
 		      text.gsub!(l, wrapped_link)
 		    end
 
-		    text.gsub!(%r{\Awww\.[\w\.]+}) do |l|
+		    text.gsub!(%r{ ?www\.[\w\.]+}) do |l|
 		    	noindex_link_to(l, "http://#{l}")
 		    end
 
