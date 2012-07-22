@@ -24,8 +24,8 @@ class ReviewsController < Spree::BaseController
     authorize! :create, @review
 
     if @review.save
-      flash[:notice] = t('review_successfully_submitted')
-      redirect_to (reviewable_url(@reviewable))
+      flash[:message] = t('review_successfully_submitted')
+      redirect_to reviewable_url(@reviewable)
     else
       render :action => "new"
     end
