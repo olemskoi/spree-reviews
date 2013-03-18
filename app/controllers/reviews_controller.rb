@@ -1,7 +1,7 @@
 class ReviewsController < Spree::BaseController
   helper Spree::BaseHelper
   before_filter :load_product, :only => [:index, :new, :create]
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_404
+  rescue_from ActiveRecord::RecordNotFound, NoMethodError, :with => :render_404
 
   def index
     @approved_reviews = Review.approved.where(:product_id => @reviewable.id)
